@@ -1,0 +1,62 @@
+Example app listening at http://:::8888
+AST_Node {
+  end: 
+   AST_Token {
+     file: null,
+     comments_before: [],
+     nlb: false,
+     endpos: 47,
+     endcol: 13,
+     endline: 3,
+     pos: 46,
+     col: 12,
+     line: 3,
+     value: ']',
+     type: 'punc' },
+  start: 
+   AST_Token {
+     file: null,
+     comments_before: [],
+     nlb: false,
+     endpos: 43,
+     endcol: 9,
+     endline: 3,
+     pos: 42,
+     col: 8,
+     line: 3,
+     value: '[',
+     type: 'punc' },
+  elements: 
+   [ AST_Node { end: [Object], start: [Object], value: 2 },
+     AST_Node { end: [Object], start: [Object], value: 3 } ] }
+AST_Node {
+  end: 
+   AST_Token {
+     file: null,
+     comments_before: [],
+     nlb: false,
+     endpos: 39,
+     endcol: 5,
+     endline: 3,
+     pos: 38,
+     col: 4,
+     line: 3,
+     value: 'a',
+     type: 'name' },
+  start: 
+   AST_Token {
+     file: null,
+     comments_before: [],
+     nlb: false,
+     endpos: 39,
+     endcol: 5,
+     endline: 3,
+     pos: 38,
+     col: 4,
+     line: 3,
+     value: 'a',
+     type: 'name' },
+  thedef: undefined,
+  name: 'a',
+  scope: undefined,
+  init: undefined }

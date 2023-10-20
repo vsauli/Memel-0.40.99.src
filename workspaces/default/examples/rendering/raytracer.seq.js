@@ -1,0 +1,501 @@
+// 100 objects
+//#pragma sequential
+function Color(r, g, b) {
+    this.r = r;
+    this.g = g;
+    this.b = b;
+}
+
+Color.prototype.times = function(other) {
+    return new Color(
+      this.r * other.r,
+      this.g * other.g,
+      this.b * other.b
+    );
+};
+
+Color.prototype.scale = function(scalar) {
+    return new Color(
+      this.r * scalar,
+      this.g * scalar,
+      this.b * scalar
+    );
+};
+
+Color.prototype.addInPlace = function(other) {
+    this.r += other.r;
+    this.g += other.g;
+    this.b += other.b;
+};
+
+Color.prototype.clampInPlace = function() {
+    this.r = this.r < 0 ? 0 : this.r > 1 ? 1 : this.r;
+    this.g = this.g < 0 ? 0 : this.g > 1 ? 1 : this.g;
+    this.b = this.b < 0 ? 0 : this.b > 1 ? 1 : this.b;
+};
+
+function Image(w, h) {
+
+    this.w = w;
+    this.h = h;
+    this.canvas = this.setcanvas();
+
+}
+
+Image.prototype.setcanvas = function() {
+
+    __remoteDOM("canvas = document.createElement('canvas');");
+    __remoteDOM("canvas.setAttribute('width',"+this.w+");");
+    __remoteDOM("canvas.setAttribute('height',"+this.h+");");
+    __remoteDOM("context = canvas.getContext('2d');");
+    __remoteDOM("imageData = context.getImageData(0,0,"+this.w+","+this.h+");");
+    __remoteDOM("pixels = imageData.data;");
+    __remoteDOM("#flush");
+
+    return {
+    	canvas:{}, // canvas,
+    	context:{}, // context,
+    	imageData:{}, // imageData,
+    	pixels:{} // pixels
+	};
+};
+
+Image.prototype.putPixel = function(x, y, color) {
+    var offset = (y * this.w + x) * 4;
+//    this.canvas.pixels[offset    ] = color.r | 0;
+//    this.canvas.pixels[offset + 1] = color.g | 0;
+//    this.canvas.pixels[offset + 2] = color.b | 0;
+//    this.canvas.pixels[offset + 3] = 255;
+    __remoteDOM("pixels["+offset+"] = "+(color.r|0)+";");
+    __remoteDOM("pixels["+offset+"+1"+"]="+(color.g|0)+";");
+    __remoteDOM("pixels["+offset+"+2"+"]="+(color.b|0)+";");
+    __remoteDOM("pixels["+offset+"+3"+"]=255;");
+
+};
+
+Image.prototype.renderInto = function(elem) {
+//    this
+//      .canvas
+//      .context
+//      .putImageData(
+//        this.canvas.imageData,
+//        0,
+//        0
+//      );
+
+//    elem.appendChild(this.canvas.canvas);
+__remoteDOM("#flush");
+__remoteDOM("context.putImageData(imageData, 0, 0);");
+__remoteDOM("elem = document.getElementById(__tid);");
+__remoteDOM("elem.appendChild(canvas);");
+
+};
+
+function Sphere(center, radius, material) {
+    this.center = center;
+    this.radius = radius;
+    this.material = material;
+}
+
+Sphere.prototype.getIntersection = function(ray) {
+    var cp = ray.origin.minus(this.center);
+
+    var a = ray.direction.dot(ray.direction);
+    var b = 2 * cp.dot(ray.direction);
+    var c = cp.dot(cp) - this.radius * this.radius;
+
+    var discriminant = b * b - 4 * a * c;
+    if (discriminant < 0) {
+      // no intersection
+        return null;
+	}
+
+    var sqrt = Math.sqrt(discriminant);
+
+    var ts = [];
+
+    var sub = (-b - sqrt) / (2 * a);
+    if (sub >= 0) {
+        ts.push(sub);
+	}
+
+    var add = (-b + sqrt) / (2 * a);
+    if (add >= 0) {
+        ts.push(add);
+	}
+
+    if (ts.length == 0) {
+        return null;
+	}
+
+    return Math.min.apply(null, ts);
+};
+
+Sphere.prototype.normalAt = function(point) {
+    return point.minus(this.center).normalized();
+};
+
+function Vector3(x, y, z) {
+    this.x = x;
+    this.y = y;
+    this.z = z;
+}
+
+Vector3.prototype.scale = function(scalar) {
+    return new Vector3(
+      this.x * scalar,
+      this.y * scalar,
+      this.z * scalar
+    );
+};
+
+Vector3.prototype.plus = function(other) {
+    return new Vector3(
+      this.x + other.x,
+      this.y + other.y,
+      this.z + other.z
+    );
+};
+
+Vector3.prototype.minus = function(other) {
+    return new Vector3(
+      this.x - other.x,
+      this.y - other.y,
+      this.z - other.z
+    );
+};
+
+Vector3.prototype.dot = function(other) {
+    return (
+      this.x * other.x +
+      this.y * other.y +
+      this.z * other.z
+    );
+};
+
+Vector3.prototype.normalized = function() {
+    var mag = Math.sqrt(this.dot(this));
+    return new Vector3(
+      this.x / mag,
+      this.y / mag,
+      this.z / mag
+    );
+};
+
+Vector3.prototype.lerp = function(start, end, t) {
+    return start.scale(1 - t).plus(end.scale(t));
+};
+
+function Ray(origin, direction) {
+    this.origin = origin;
+    this.direction = direction;
+}
+
+Ray.prototype.at = function(t) {
+    return this.origin.plus(this.direction.scale(t));
+};
+
+var MAX_BOUNCES = 5;
+var NUM_SAMPLES_PER_DIRECTION = 3;
+var NUM_SAMPLES_PER_PIXEL =
+  NUM_SAMPLES_PER_DIRECTION * NUM_SAMPLES_PER_DIRECTION;
+
+function RayTracer(scene, w, h) {
+    this.scene = scene;
+    this.w = w;
+    this.h = h;
+}
+
+RayTracer.prototype.tracedValueAtPixel = function(x, y) {
+    var color = new Color(0, 0, 0);
+
+    for (var dx = 0; dx < NUM_SAMPLES_PER_DIRECTION; dx++) {
+      for (var dy = 0; dy < NUM_SAMPLES_PER_DIRECTION; dy++) {
+        var ray = this._rayForPixel(
+          x + dx / NUM_SAMPLES_PER_DIRECTION,
+          y + dy / NUM_SAMPLES_PER_DIRECTION
+        );
+
+        var sample = this._tracedValueForRay(ray, MAX_BOUNCES);
+        color.addInPlace(sample.scale(1 / NUM_SAMPLES_PER_PIXEL));
+      }
+    }
+
+    return color;
+};
+
+RayTracer.prototype._tracedValueForRay = function (ray, depth) {
+    function min(xs, f) {
+        if (xs.length == 0) {
+    	    return null;
+    	    }
+
+        var minValue = Infinity;
+        var minElement = null;
+        for (var x=0; x<xs.length; x++) {
+    	    var value = f(xs[x]);
+    	    if (value < minValue) {
+        	    minValue = value;
+        	    minElement = xs[x];
+    		    }
+    	    }
+
+    	return minElement;
+    }
+
+    var intersection = min(
+        this.scene
+    	    .objects
+    	    .map(function(obj) {
+        	var t = obj.getIntersection(ray);
+        	if (!t) { return null; }
+
+        	var point = ray.at(t);
+
+        	return {
+        	    object: obj,
+        	    t: t,
+        	    point: point,
+        	    normal: obj.normalAt(point)
+        	    };
+    		})
+    	    .filter(function(intersection) { return intersection }),
+        function(intersection) { return intersection.t}
+	);
+
+    if (!intersection) {
+        return new Color(0, 0, 0);
+	}
+
+    var color = this._colorAtIntersection(intersection);
+
+    if (depth > 0) {
+        var v = ray.direction.scale(-1).normalized();
+        var r = intersection
+    	    .normal
+    	    .scale(2)
+    	    .scale(intersection.normal.dot(v))
+    	    .minus(v);
+        var reflectionRay = new Ray(
+    	    intersection.point.plus(intersection.normal.scale(0.01)),
+    	    r
+    	    );
+
+        var reflected = this._tracedValueForRay(reflectionRay, depth - 1);
+        color.addInPlace(reflected.times(intersection.object.material.kr));
+	}
+
+    return color;
+};
+
+RayTracer.prototype._colorAtIntersection = function(intersection) {
+    var that = this;
+    var color = new Color(0, 0, 0);
+    var material = intersection.object.material;
+
+    var v = this.scene
+        .camera
+        .minus(intersection.point)
+        .normalized();
+
+    this.scene
+        .lights
+        .forEach(function(light) {
+    	    var l = light
+        	.position
+        	.minus(intersection.point)
+        	.normalized();
+
+    	    var lightInNormalDirection = intersection.normal.dot(l);
+    	    if (lightInNormalDirection < 0) {
+        	return;
+    		}
+
+    	    var isShadowed = that._isPointInShadowFromLight(
+        	intersection.point,
+        	intersection.object,
+        	light
+    		);
+    	    if (isShadowed) {
+        	return;
+    		}
+
+    	    var diffuse = material
+        	.kd
+        	.times(light.id)
+        	.scale(lightInNormalDirection);
+    		color.addInPlace(diffuse);
+
+    	    var r = intersection
+        	.normal
+        	.scale(2)
+        	.scale(lightInNormalDirection)
+        	.minus(l);
+
+    	    var amountReflectedAtViewer = v.dot(r);
+    	    var specular = material
+        	.ks
+        	.times(light.is)
+        	.scale(Math.pow(amountReflectedAtViewer, material.alpha));
+    		color.addInPlace(specular);
+    	    });
+
+    var ambient = material
+        .ka
+        .times(this.scene.ia);
+	color.addInPlace(ambient);
+
+    color.clampInPlace();
+    return color;
+};
+
+RayTracer.prototype._isPointInShadowFromLight = function(point, objectToExclude, light) {
+    var shadowRay = new Ray(
+        point,
+        light.position.minus(point)
+	);
+
+    for (var i in this.scene.objects) {
+        var obj = this.scene.objects[i];
+        if (obj == objectToExclude) {
+    	    continue;
+    	    }
+
+        var t = obj.getIntersection(shadowRay);
+        if (t && t <= 1) {
+    	    return true;
+    	    }
+	}
+
+    return false;
+};
+
+RayTracer.prototype._rayForPixel = function(x, y) {
+    var xt = x / this.w;
+    var yt = (this.h - y - 1) / this.h;
+
+    var tv = new Vector3(0,0,0);
+    var top = tv.lerp(
+        this.scene.imagePlane.topLeft,
+        this.scene.imagePlane.topRight,
+        xt
+	);
+
+    var bv = new Vector3(0,0,0);
+    var bottom = bv.lerp(
+        this.scene.imagePlane.bottomLeft,
+        this.scene.imagePlane.bottomRight,
+        xt
+	);
+
+    var tv = new Vector3(0,0,0);
+    var point = tv.lerp(bottom, top, yt);
+    return new Ray(
+        point,
+        point.minus(this.scene.camera)
+	);
+};
+
+var WIDTH = 256;
+var HEIGHT = 192;
+
+var SCENE = {
+    camera: new Vector3(0, 0, 2),
+    imagePlane: {
+	topLeft: new Vector3(-1.28, 0.86, -0.5),
+	topRight: new Vector3(1.28, 0.86, -0.5),
+	bottomLeft: new Vector3(-1.28, -0.86, -0.5),
+	bottomRight: new Vector3(1.28, -0.86, -0.5)
+    },
+    ia: new Color(0.5, 0.5, 0.5),
+    lights: [
+	{
+    	    position: new Vector3(-3, -0.5, 1),
+    	    id: new Color(0.8, 0.3, 0.3),
+    	    is: new Color(0.8, 0.8, 0.8)
+	},
+	{
+    	    position: new Vector3(3, 2, 1),
+    	    id: new Color(0.4, 0.4, 0.9),
+    	    is: new Color(0.8, 0.8, 0.8)
+	}
+    ],
+    objects: [
+	new Sphere(
+    	    new Vector3(-1.1, 0.6, -1),
+    	    0.2,
+    	    {
+    		ka: new Color(0.1, 0.1, 0.1),
+    		kd: new Color(0.5, 0.5, 0.9),
+    		ks: new Color(0.7, 0.7, 0.7),
+    		alpha: 20,
+    		kr: new Color(0.1, 0.1, 0.2)
+    	    }
+	    ),
+	new Sphere(
+    	    new Vector3(0.2, -0.1, -1),
+    	    0.5,
+    	    {	
+    		ka: new Color(0.1, 0.1, 0.1),
+    		kd: new Color(0.9, 0.5, 0.5),
+    		ks: new Color(0.7, 0.7, 0.7),
+    		alpha: 20,
+    		kr: new Color(0.2, 0.1, 0.1)
+
+    	    }
+	    ),
+	new Sphere(
+    	    new Vector3(1.2, -0.5, -1.75),
+    	    0.4,
+    	    {
+    		ka: new Color(0.1, 0.1, 0.1),
+    		kd: new Color(0.1, 0.5, 0.1),
+    		ks: new Color(0.7, 0.7, 0.7),
+    		alpha: 20,
+    		kr: new Color(0.8, 0.9, 0.8)
+    	    }
+	    )
+	]
+};
+
+for (var j=3; j<=100; j++) {
+    SCENE.objects[j] = SCENE.objects[1];
+    }
+
+var image = new Image(WIDTH, HEIGHT);
+//document.image = image;
+
+var imageColorFromColor = function(color) {
+    return {
+	r: Math.floor(color.r * 255),
+	g: Math.floor(color.g * 255),
+	b: Math.floor(color.b * 255)
+    }
+};
+
+var start_time = new Date().getTime();
+console.log(start_time);
+//    if (rp) fs.appendFileSync('linit.rpt.jsc', start_time + "\n");
+var finish_time;
+var elapse_time;
+
+var tracer = new RayTracer(SCENE, WIDTH, HEIGHT);
+
+for (var y = 0; y < HEIGHT; y++) {
+//    console.log(y);
+    for (var x = 0; x < WIDTH; x++) {
+	image.putPixel(
+    	    x,
+    	    y,
+    	    imageColorFromColor(tracer.tracedValueAtPixel(x, y))
+	    );
+	}
+    }
+
+image.renderInto( {} /* document.querySelector('body') */ );
+
+finish_time = new Date().getTime();
+console.log(finish_time);
+elapse_time = (finish_time - start_time) / 1000;
+console.log("Elapse time: " + elapse_time + " sec");
+

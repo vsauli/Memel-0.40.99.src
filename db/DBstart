@@ -1,0 +1,1 @@
+mongod --bind_ip 127.0.0.1 --dbpath /srv/www/cgi-bin/Memel/4.0/memelapp/db --fork --logpath /srv/www/cgi-bin/Memel/4.0/memelapp/db/local.log --logappend

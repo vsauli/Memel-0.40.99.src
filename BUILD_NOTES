@@ -1,0 +1,52 @@
+0.40.90
+
+    - added 'for...of' operator to uglify-js by analogy with 'for...in'.
+    
+    - finalized sequential version of Sparse-Matrix (CG) Berkeley dwarf
+    
+0.40.91
+
+    - __set_Par_Var_Value - array slice saves introduced
+    
+    - Berkeley dwarf 02 (Sparce Matix) example created
+    
+0.40.92
+
+    - socketSync writes made synchronous
+    
+    - various changes to improve system stability
+    
+    - global setInterval(Kernel.wakeupOne, 5000) added to resolve race
+      condition on OPU idle state, which sometimes happen on heavily loaded
+      system.
+      
+0.40.93
+
+    - acheaved more stability with __get and __set variables transfer
+      from/to the server
+
+0.40.94
+
+    - Berkeley dwarf 02 (Sparse Matrix) example finished
+    
+0.40.95
+
+    - Berkeley dwarf 07 (Monte-Carlo) example added
+    
+0.40.96
+
+    - Examples updates
+
+0.40.97
+
+    - LP simplex method example created
+    - changed "database" to "workspace" in Web interface.
+
+0.40.98
+
+    - Berkeley dwarf 03 (FFT) sequential example added
+    
+0.40.99
+
+    - Berkeley dwarf 03 (FFT) parallel example added
+

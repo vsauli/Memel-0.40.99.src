@@ -1,0 +1,412 @@
+html, body {
+    font:normal 12px verdana;
+    margin:0;
+    padding:0;
+    border:0 none;
+    overflow:hidden;
+    height:100%;
+}
+
+h1 {
+	font-family: Georgia,"Times New Roman",Times,serif;
+	font-size:26px;
+	color:#083772;
+	letter-spacing:-1px;
+	font-weight:normal;
+}
+h2 {
+	font-size: 18px;
+	line-height:18px;
+	color:#083772;
+	margin-bottom:15px;
+	font-weight:normal;
+}
+p {
+	margin:8px 20px;
+	line-height:18px;
+}
+input {
+	margin: 8px 20px;
+}
+#myDiv {
+	border:2px solid #1F3E75;
+	background:#DFECFB;
+	margin:20px 50px;
+	padding:10px 20px;
+	width:200px;
+	text-align:center;
+}
+.red {
+	color: red;
+}
+
+/* GRID */
+
+.x-resizable-pinned .x-resizable-handle-south{
+    background:url(../../resources/images/default/sizer/s-handle-dark.gif);
+    background-position: top;
+}
+
+
+.x-layout-panel-north {
+    border:0px none;
+}
+
+#center, #west {
+    padding:0px;
+}
+
+#northpane {
+    padding: 7px;
+    font:bold 10pt verdana, arial, helvetica;
+    background: blue;
+}
+
+#south{
+    font:normal 8pt arial, helvetica;
+    padding:0px;
+}
+
+.x-layout-panel-center p {
+    margin:5px;
+}
+
+.x-layout-collapsed-west{
+    background-image:url(/cljs/images/news_bg.gif);
+    background-repeat:no-repeat;
+    background-position:center;
+}		
+
+.x-layout-collapsed-east{
+    background-image:url(/cljs/images/tools_bg.gif);
+    background-repeat:no-repeat;
+    background-position:center;
+}		
+
+.x-layout-collapsed-south{
+    background-image:url(/cljs/images/messages_bg.gif);
+    background-repeat:no-repeat;
+    background-position:center;
+}		
+
+#props-panel .x-grid-col-0{
+}
+
+#props-panel .x-grid-col-1{
+}
+
+.m-center-tabs {
+    padding-left: 0px;
+    padding-right: 20px;
+    margin: 10 10 10 10px;
+    border: 0 none;
+}
+
+.overclass {
+    overflow: hidden;
+    border: 2px solid green;
+}
+
+.clt-icon {
+    width: 48px;
+    height: 48px;
+    text-align: center;
+    font-size: 7pt;
+    border: solid 1px black;
+    padding-top: 48px;
+    background-image: url(/cljs/images/clients.gif);
+    background-repeat: no-repeat;
+    margin-bottom: 5px;
+}
+
+.inv-icon {
+    width: 48px;
+    height: 48px;
+    text-align: center;
+    font-size: 7pt;
+    border: solid 1px black;
+    padding-top: 48px;
+    background-image: url(/cljs/images/invoices.gif);
+    background-repeat: no-repeat;
+    margin-bottom: 5px;
+}
+
+.pay-icon {
+    width: 48px;
+    height: 48px;
+    text-align: center;
+    font-size: 7pt;
+    border: solid 1px black;
+    padding-top: 48px;
+    background-image: url(/cljs/images/payments.gif);
+    background-repeat: no-repeat;
+    margin-bottom: 5px;
+}
+
+.saft-icon {
+    width: 48px;
+    height: 48px;
+    text-align: center;
+    font-size: 7pt;
+    border: solid 1px black;
+    padding-top: 48px;
+    background-image: url(/cljs/images/saft.gif);
+    background-repeat: no-repeat;
+    margin-bottom: 5px;
+}
+
+.book-icon {
+    width: 48px;
+    height: 48px;
+    text-align: center;
+    font-size: 7pt;
+    border: solid 1px black;
+    padding-top: 48px;
+    background-image: url(/cljs/images/booking.gif);
+    background-repeat: no-repeat;
+    margin-bottom: 5px;
+}
+
+.opu-icon {
+    width: 48px;
+    height: 48px;
+    text-align: center;
+    font-size: 7pt;
+/*    border: solid 1px black; */
+    padding-top: 48px;
+    background-image: url(/cljs/images/booking.gif);
+    background-repeat: no-repeat;
+    margin-bottom: 5px;
+}
+
+.login-form {background-color: blue;}
+
+.user-id {background-color: blue; color: yellow; font-weight: normal;}
+
+.x-grid3-td-subj b {
+    font-family: tahoma, verdana;
+}
+
+.x-grid3-td-subj .news-subj {
+    padding-left: 2px;
+    float: left;
+    display: block;
+    white-space: normal;
+}
+
+.x-grid3-td-subj .news-topic {
+    padding: -10px 5px 10px 15px;
+    display: block;
+    float: right;
+    white-space: normal;
+    color: #E0E;
+}
+
+.news-body {
+    border-bottom: dashed 1px #999;
+    display: block;
+    margin: 10px 10px 10px 10px;
+    padding-bottom: 5px;
+    white-space: normal;
+    color: #333;
+}
+
+#editor { 
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+.msg .x-box-mc {
+    font-size:14px;
+}
+#msg-div {
+    position:absolute;
+    left:35%;
+    top:10px;
+    width:250px;
+    z-index:20000;
+}
+
+.x-toolbar .my-btn-over .x-btn-tl{background-position:-6px 0}
+.x-toolbar .my-btn-over .x-btn-tr{background-position:-9px 0}
+.x-toolbar .my-btn-over .x-btn-tc{background-position:0 -9px}
+.x-toolbar .my-btn-over .x-btn-ml{background-position:-6px -24px}
+.x-toolbar .my-btn-over .x-btn-mr{background-position:-9px -24px}
+.x-toolbar .my-btn-over .x-btn-mc{background-position:0 -2168px}
+.x-toolbar .my-btn-over .x-btn-bl{background-position:-6px -3px}
+.x-toolbar .my-btn-over .x-btn-br{background-position:-9px -3px}
+.x-toolbar .my-btn-over .x-btn-bc{background-position:0 -18px}
+
+.reset-this {
+    animation : none;
+    animation-delay : 0;
+    animation-direction : normal;
+    animation-duration : 0;
+    animation-fill-mode : none;
+    animation-iteration-count : 1;
+    animation-name : none;
+    animation-play-state : running;
+    animation-timing-function : ease;
+    backface-visibility : visible;
+    background : 0;
+    background-attachment : scroll;
+    background-clip : border-box;
+    background-color : transparent;
+    background-image : none;
+    background-origin : padding-box;
+    background-position : 0 0;
+    background-position-x : 0;
+    background-position-y : 0;
+    background-repeat : repeat;
+    background-size : auto auto;
+    border : 0;
+    border-style : none;
+    border-width : medium;
+    border-color : inherit;
+    border-bottom : 0;
+    border-bottom-color : inherit;
+    border-bottom-left-radius : 0;
+    border-bottom-right-radius : 0;
+    border-bottom-style : none;
+    border-bottom-width : medium;
+    border-collapse : separate;
+    border-image : none;
+    border-left : 0;
+    border-left-color : inherit;
+    border-left-style : none;
+    border-left-width : medium;
+    border-radius : 0;
+    border-right : 0;
+    border-right-color : inherit;
+    border-right-style : none;
+    border-right-width : medium;
+    border-spacing : 0;
+    border-top : 0;
+    border-top-color : inherit;
+    border-top-left-radius : 0;
+    border-top-right-radius : 0;
+    border-top-style : none;
+    border-top-width : medium;
+    bottom : auto;
+    box-shadow : none;
+    box-sizing : content-box;
+    caption-side : top;
+    clear : none;
+    clip : auto;
+    color : inherit;
+    columns : auto;
+    column-count : auto;
+    column-fill : balance;
+    column-gap : normal;
+    column-rule : medium none currentColor;
+    column-rule-color : currentColor;
+    column-rule-style : none;
+    column-rule-width : none;
+    column-span : 1;
+                                                                                                                                                                                                                                                                        column-width : auto;
+                                                                                                                                                                                                                                                                            content : normal;
+                                                                                                                                                                                                                                                                                counter-increment : none;
+                                                                                                                                                                                                                                                                                    counter-reset : none;
+                                                                                                                                                                                                                                                                                        cursor : auto;
+                                                                                                                                                                                                                                                                                            direction : ltr;
+                                                                                                                                                                                                                                                                                                display : inline;
+                                                                                                                                                                                                                                                                                                    empty-cells : show;
+                                                                                                                                                                                                                                                                                                        float : none;
+                                                                                                                                                                                                                                                                                                            font : normal;
+                                                                                                                                                                                                                                                                                                                font-family : inherit;
+                                                                                                                                                                                                                                                                                                                    font-size : medium;
+                                                                                                                                                                                                                                                                                                                        font-style : normal;
+                                                                                                                                                                                                                                                                                                                            font-variant : normal;
+                                                                                                                                                                                                                                                                                                                                font-weight : normal;
+                                                                                                                                                                                                                                                                                                                                    height : auto;
+                                                                                                                                                                                                                                                                                                                                        hyphens : none;
+                                                                                                                                                                                                                                                                                                                                            left : auto;
+                                                                                                                                                                                                                                                                                                                                                letter-spacing : normal;
+                                                                                                                                                                                                                                                                                                                                                    line-height : normal;
+                                                                                                                                                                                                                                                                                                                                                        list-style : none;
+                                                                                                                                                                                                                                                                                                                                                            list-style-image : none;
+                                                                                                                                                                                                                                                                                                                                                                list-style-position : outside;
+                                                                                                                                                                                                                                                                                                                                                                    list-style-type : disc;
+                                                                                                                                                                                                                                                                                                                                                                        margin : 0;
+                                                                                                                                                                                                                                                                                                                                                                            margin-bottom : 0;
+                                                                                                                                                                                                                                                                                                                                                                                margin-left : 0;
+                                                                                                                                                                                                                                                                                                                                                                                    margin-right : 0;
+                                                                                                                                                                                                                                                                                                                                                                                        margin-top : 0;
+                                                                                                                                                                                                                                                                                                                                                                                            max-height : none;
+                                                                                                                                                                                                                                                                                                                                                                                                max-width : none;
+                                                                                                                                                                                                                                                                                                                                                                                                    min-height : 0;
+                                                                                                                                                                                                                                                                                                                                                                                                        min-width : 0;
+                                                                                                                                                                                                                                                                                                                                                                                                            opacity : 1;
+                                                                                                                                                                                                                                                                                                                                                                                                                orphans : 0;
+                                                                                                                                                                                                                                                                                                                                                                                                                    outline : 0;
+                                                                                                                                                                                                                                                                                                                                                                                                                        outline-color : invert;
+                                                                                                                                                                                                                                                                                                                                                                                                                            outline-style : none;
+                                                                                                                                                                                                                                                                                                                                                                                                                                outline-width : medium;
+                                                                                                                                                                                                                                                                                                                                                                                                                                    overflow : visible;
+                                                                                                                                                                                                                                                                                                                                                                                                                                        overflow-x : visible;
+                                                                                                                                                                                                                                                                                                                                                                                                                                            overflow-y : visible;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                padding : 0;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                    padding-bottom : 0;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                        padding-left : 0;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                            padding-right : 0;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                padding-top : 0;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                    page-break-after : auto;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                        page-break-before : auto;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                            page-break-inside : auto;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                perspective : none;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    perspective-origin : 50% 50%;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        position : static;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            /* May need to alter quotes for different locales (e.g fr) */
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                quotes : '\201C' '\201D' '\2018' '\2019';
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    right : auto;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        tab-size : 8;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            table-layout : auto;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                text-align : inherit;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    text-align-last : auto;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        text-decoration : none;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            text-decoration-color : inherit;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                text-decoration-line : none;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    text-decoration-style : solid;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        text-indent : 0;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            text-shadow : none;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                text-transform : none;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    top : auto;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        transform : none;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            transform-style : flat;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                transition : none;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    transition-delay : 0s;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        transition-duration : 0s;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            transition-property : none;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                transition-timing-function : ease;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    unicode-bidi : normal;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        vertical-align : baseline;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            visibility : visible;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                white-space : normal;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    widows : 0;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        width : auto;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            word-spacing : normal;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                z-index : auto;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    /* basic modern patch */
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        all: initial;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            all: unset;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            }
+
+#base {
+    all: initial;
+    * {
+	all: unset;
+    }
+}
+
+#base h1 {
+    font-weight: bold;
+    color: black;
+}
+
+#base h2 {
+    font-weight: bold;
+    color: black;
+}

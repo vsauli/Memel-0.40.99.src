@@ -1,0 +1,1 @@
+cp -rf --strip-trailing-slashes workspaces/default/ workspaces/$1

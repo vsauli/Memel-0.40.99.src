@@ -1,0 +1,2 @@
+#!/bin/bash
+pm2 start OPU.js -i 8 --name 'opus'

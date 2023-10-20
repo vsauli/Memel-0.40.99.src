@@ -1,0 +1,33 @@
+function __get_Cached_Var_Value(cvar, __job) {
+
+	var snd = __job.socket.write(JSON.stringify({cvar: cvar, command: 'getcachedvar', tasknum: __job.data.taskNum, opu_nr: __job.opu_nr}));
+	__job.socket.blocking(false);
+
+
+	var chunk = '';
+	var res = '';
+	var last = 0;
+	while (true) {
+	    chunk = __job.socket.read(1024, false);
+	    if (chunk != undefined && chunk.length != 0) { 
+		res += chunk.toString(); 
+		if (chunk.toString() != null) last = chunk.toString().length;
+		else last = 0;
+		}
+	    else if (chunk == undefined && last == 1024) break; // in respose length is a multiply of 1024
+	    for (var i=0; i<5000; i++) {}
+	    if (chunk && chunk != null && chunk.length < 1024) break;
+	    }
+
+	try {
+	    var rs = JSON.parse(res);
+	    } 
+	catch(ee) { rs = null; } 
+
+	
+    if (rs && rs.cval == null) return undefined;
+    if (rs) return rs.cval;
+    return undefined;
+
+}
+

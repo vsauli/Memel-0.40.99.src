@@ -1,0 +1,20 @@
+This workspace contains 'examples' directory. Press '+' sign on the left
+to expand it. You'll find few examples, each of them consisting of
+two versions - parallel and sequential. So, you'll be able to compare execution
+times of each version to see the difference between parallel and sequential
+code running in our parallel machine.
+
+If you registered and logged in, you get your own workspace, where you can
+alter the examples code and save them. Also, You can create  more experiments,
+adding you own new files/examples.
+
+You feedback on your experience with Parallel Machine is strongly appreciated.
+Please send feedbacks and/or questions to 'support@prodata.lt'
+
+If you wish to make donations for the project, please send them to PayPal
+account 'vladas@prodata.lt'.
+
+
+Copyright (c) 2017-2020, Prodata Software Company. All rights reserved.
+
+Vladas Saulis - Owner & CEO of Prodata.

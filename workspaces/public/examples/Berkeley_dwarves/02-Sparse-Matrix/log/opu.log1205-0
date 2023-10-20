@@ -1,0 +1,132 @@
+var start_time=undefined;
+var finish_time=undefined;
+var elapse_time=undefined;
+var OPUS=undefined;
+var a=undefined;
+var aidx=undefined;
+var arow=undefined;
+var apos=undefined;
+var n=undefined;
+var non_zeros=undefined;
+var niter=undefined;
+var nitcg=undefined;
+var rcond=undefined;
+var nzc=undefined;
+var x=undefined;
+var zeta=undefined;
+var zeta1=undefined;
+var zeta2=undefined;
+var zetapr=undefined;
+var resid=undefined;
+var maxval=undefined;
+var z=undefined;
+var r=undefined;
+var p=undefined;
+var q=undefined;
+var rho=undefined;
+var rho0=undefined;
+var alpha=undefined;
+var beta=undefined;
+var iter=undefined;
+var itcg=undefined;
+var aij=undefined;
+var i=undefined;
+;;
+// use --max-old-space-size=2048 with node binary
+// NAS tri-vector sparce matrix format
+////#pragma parvar a    // to avoid transferring 'a' to the server
+////#pragma parvar aidx  //  --//--
+////#pragma parvar arow  //  --//--
+//#pragma sequential
+var start_time = new Date().getTime();var finish_time;var elapse_time;var OPUS = 1;var a = [];var aidx = [];var arow = [];var apos;var n = 14e3;var non_zeros = 11;var niter = 15;var nitcg = 25;var rcond = .1;var nzc;var x = [];var zeta = 0;var zeta1 = 0;var zeta2 = 0;var zetapr = 0;var resid = 0;var maxval = 0;var z = [];var r = [];var p = [];var q = [];var rho = 0;var rho0 = 0;var alpha = 0;var beta = 0;var iter;var itcg;var aij;var i;makea();;__job.data.vars['start_time'].value=start_time;
+__job.data.vars['finish_time'].value=finish_time;
+__job.data.vars['elapse_time'].value=elapse_time;
+__job.data.vars['OPUS'].value=OPUS;
+__job.data.vars['a'].value=a;
+__job.data.vars['aidx'].value=aidx;
+__job.data.vars['arow'].value=arow;
+__job.data.vars['apos'].value=apos;
+__job.data.vars['n'].value=n;
+__job.data.vars['non_zeros'].value=non_zeros;
+__job.data.vars['niter'].value=niter;
+__job.data.vars['nitcg'].value=nitcg;
+__job.data.vars['rcond'].value=rcond;
+__job.data.vars['nzc'].value=nzc;
+__job.data.vars['x'].value=x;
+__job.data.vars['zeta'].value=zeta;
+__job.data.vars['zeta1'].value=zeta1;
+__job.data.vars['zeta2'].value=zeta2;
+__job.data.vars['zetapr'].value=zetapr;
+__job.data.vars['resid'].value=resid;
+__job.data.vars['maxval'].value=maxval;
+__job.data.vars['z'].value=z;
+__job.data.vars['r'].value=r;
+__job.data.vars['p'].value=p;
+__job.data.vars['q'].value=q;
+__job.data.vars['rho'].value=rho;
+__job.data.vars['rho0'].value=rho0;
+__job.data.vars['alpha'].value=alpha;
+__job.data.vars['beta'].value=beta;
+__job.data.vars['iter'].value=iter;
+__job.data.vars['itcg'].value=itcg;
+__job.data.vars['aij'].value=aij;
+__job.data.vars['i'].value=i;
+return;
+function makea() {
+    var r = [];
+    // sparce array for non-zero random columns
+    var sa = [];
+    // native sparce version of matrix a
+    var size;
+    for (i = 0; i < n; i++) {
+        sa[i] = [];
+    }
+    for (i = 0; i < n; i++) {
+        r = [];
+        for (j = 1; j <= non_zeros; j++) {
+            r[Math.floor(Math.random() * n)] = Math.random();
+        }
+        while (r.reduce(function(t) {
+            ++t;
+        }) < non_zeros) {
+            // while there was dublicates
+            r[Math.floor(Math.random() * n)] = Math.random();
+        }
+        r[i] = .5;
+        size = Math.pow(rcond, i / n);
+        for (j in r) {
+            for (k in r) {
+                if (!sa[j][k]) sa[j][k] = 0;
+                sa[j][k] += r[j] * r[k] * size;
+            }
+        }
+    }
+    for (i = 0; i < n; i++) {
+        if (!sa[i][i]) sa[i][i] = 0;
+        sa[i][i] += rcond;
+    }
+    finish_time = new Date().getTime();
+    elapse_time = (finish_time - start_time) / 1e3;
+    console.log("Base matrix creation time: " + elapse_time + " sec");
+    start_time = finish_time;
+    //    console.log(sa);
+    // make compressed sparse matrix 'a' like in nesl example's SPARSE function
+    nzc = 0;
+    var k;
+    for (i = 0; i < n; i++) {
+        k = 0;
+        for (j in sa[i]) {
+            a.push(Math.round(sa[i][j] * 1e3) / 1e3);
+            aidx.push(j * 1);
+            k++;
+        }
+        sa[i].length = 0;
+        arow.push(k);
+        nzc += k;
+    }
+    console.log("Final nonzero count: " + nzc);
+}function dotp(v1, v2) {
+    var res = 0;
+    for (var ii = 0; ii < n; ii++) res += v1[ii] * v2[ii];
+    return res;
+}

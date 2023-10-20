@@ -1,0 +1,327 @@
+Example app listening at http://:::8888
+par
+i = 0; return i<8;
+i = 1; return i<8;
+i = 2; return i<8;
+i = 3; return i<8;
+i = 4; return i<8;
+i = 5; return i<8;
+i = 6; return i<8;
+i = 7; return i<8;
+i = 8; return i<8;
+Queue {
+  first: 
+   QNode {
+     data: 
+      { id: 1,
+        vars: [Object],
+        taskNum: 2,
+        src: '// Test sample\n//#pragma parallel\nfor (var i=0; i<8; i++) {\n    //#pragma sequential\n    var k=0;\n    for (var j=0; j<1000000; j++) {\n        k = k + i + 1;\n        }\n    }\n//#pragma wait\nvar d = Date().toISOString();',
+        ast: [Object],
+        precode: 'i = 0;',
+        code: '//#pragma sequential\nvar k=0for(var j=0;j<1e6;j++){k=k+i+1}',
+        in_progress: false,
+        wait_id: 1 },
+     next: QNode { data: [Object], next: [Object], prev: [Circular], id: 2 },
+     prev: null,
+     id: 1 },
+  last: 
+   QNode {
+     data: 
+      { id: 8,
+        vars: [Object],
+        taskNum: 2,
+        src: '// Test sample\n//#pragma parallel\nfor (var i=0; i<8; i++) {\n    //#pragma sequential\n    var k=0;\n    for (var j=0; j<1000000; j++) {\n        k = k + i + 1;\n        }\n    }\n//#pragma wait\nvar d = Date().toISOString();',
+        ast: [Object],
+        precode: 'i = 7;',
+        code: '//#pragma sequential\nvar k=0for(var j=0;j<1e6;j++){k=k+i+1}',
+        in_progress: false,
+        wait_id: 1 },
+     next: null,
+     prev: QNode { data: [Object], next: [Circular], prev: [Object], id: 7 },
+     id: 8 },
+  size: 8,
+  next_node_id: 9,
+  locked: false,
+  lock_num: 8,
+  lock_next_num: 9 }
+QNode {
+  data: 
+   { id: 1,
+     vars: { i: [Object], k: [Object], j: [Object] },
+     taskNum: 2,
+     src: '// Test sample\n//#pragma parallel\nfor (var i=0; i<8; i++) {\n    //#pragma sequential\n    var k=0;\n    for (var j=0; j<1000000; j++) {\n        k = k + i + 1;\n        }\n    }\n//#pragma wait\nvar d = Date().toISOString();',
+     ast: [ [Object], [Object] ],
+     precode: 'i = 0;',
+     code: '//#pragma sequential\nvar k=0for(var j=0;j<1e6;j++){k=k+i+1}',
+     in_progress: false,
+     wait_id: 1 },
+  next: 
+   QNode {
+     data: 
+      { id: 2,
+        vars: [Object],
+        taskNum: 2,
+        src: '// Test sample\n//#pragma parallel\nfor (var i=0; i<8; i++) {\n    //#pragma sequential\n    var k=0;\n    for (var j=0; j<1000000; j++) {\n        k = k + i + 1;\n        }\n    }\n//#pragma wait\nvar d = Date().toISOString();',
+        ast: [Object],
+        precode: 'i = 1;',
+        code: '//#pragma sequential\nvar k=0for(var j=0;j<1e6;j++){k=k+i+1}',
+        in_progress: false,
+        wait_id: 1 },
+     next: QNode { data: [Object], next: [Object], prev: [Circular], id: 3 },
+     prev: [Circular],
+     id: 2 },
+  prev: null,
+  id: 1 }
+QNode {
+  data: 
+   { id: 2,
+     vars: { i: [Object], k: [Object], j: [Object] },
+     taskNum: 2,
+     src: '// Test sample\n//#pragma parallel\nfor (var i=0; i<8; i++) {\n    //#pragma sequential\n    var k=0;\n    for (var j=0; j<1000000; j++) {\n        k = k + i + 1;\n        }\n    }\n//#pragma wait\nvar d = Date().toISOString();',
+     ast: [ [Object], [Object] ],
+     precode: 'i = 1;',
+     code: '//#pragma sequential\nvar k=0for(var j=0;j<1e6;j++){k=k+i+1}',
+     in_progress: false,
+     wait_id: 1 },
+  next: 
+   QNode {
+     data: 
+      { id: 3,
+        vars: [Object],
+        taskNum: 2,
+        src: '// Test sample\n//#pragma parallel\nfor (var i=0; i<8; i++) {\n    //#pragma sequential\n    var k=0;\n    for (var j=0; j<1000000; j++) {\n        k = k + i + 1;\n        }\n    }\n//#pragma wait\nvar d = Date().toISOString();',
+        ast: [Object],
+        precode: 'i = 2;',
+        code: '//#pragma sequential\nvar k=0for(var j=0;j<1e6;j++){k=k+i+1}',
+        in_progress: false,
+        wait_id: 1 },
+     next: QNode { data: [Object], next: [Object], prev: [Circular], id: 4 },
+     prev: [Circular],
+     id: 3 },
+  prev: 
+   QNode {
+     data: 
+      { id: 1,
+        vars: [Object],
+        taskNum: 2,
+        src: '// Test sample\n//#pragma parallel\nfor (var i=0; i<8; i++) {\n    //#pragma sequential\n    var k=0;\n    for (var j=0; j<1000000; j++) {\n        k = k + i + 1;\n        }\n    }\n//#pragma wait\nvar d = Date().toISOString();',
+        ast: [Object],
+        precode: 'i = 0;',
+        code: '//#pragma sequential\nvar k=0for(var j=0;j<1e6;j++){k=k+i+1}',
+        in_progress: false,
+        wait_id: 1 },
+     next: [Circular],
+     prev: null,
+     id: 1 },
+  id: 2 }
+QNode {
+  data: 
+   { id: 3,
+     vars: { i: [Object], k: [Object], j: [Object] },
+     taskNum: 2,
+     src: '// Test sample\n//#pragma parallel\nfor (var i=0; i<8; i++) {\n    //#pragma sequential\n    var k=0;\n    for (var j=0; j<1000000; j++) {\n        k = k + i + 1;\n        }\n    }\n//#pragma wait\nvar d = Date().toISOString();',
+     ast: [ [Object], [Object] ],
+     precode: 'i = 2;',
+     code: '//#pragma sequential\nvar k=0for(var j=0;j<1e6;j++){k=k+i+1}',
+     in_progress: false,
+     wait_id: 1 },
+  next: 
+   QNode {
+     data: 
+      { id: 4,
+        vars: [Object],
+        taskNum: 2,
+        src: '// Test sample\n//#pragma parallel\nfor (var i=0; i<8; i++) {\n    //#pragma sequential\n    var k=0;\n    for (var j=0; j<1000000; j++) {\n        k = k + i + 1;\n        }\n    }\n//#pragma wait\nvar d = Date().toISOString();',
+        ast: [Object],
+        precode: 'i = 3;',
+        code: '//#pragma sequential\nvar k=0for(var j=0;j<1e6;j++){k=k+i+1}',
+        in_progress: false,
+        wait_id: 1 },
+     next: QNode { data: [Object], next: [Object], prev: [Circular], id: 5 },
+     prev: [Circular],
+     id: 4 },
+  prev: 
+   QNode {
+     data: 
+      { id: 2,
+        vars: [Object],
+        taskNum: 2,
+        src: '// Test sample\n//#pragma parallel\nfor (var i=0; i<8; i++) {\n    //#pragma sequential\n    var k=0;\n    for (var j=0; j<1000000; j++) {\n        k = k + i + 1;\n        }\n    }\n//#pragma wait\nvar d = Date().toISOString();',
+        ast: [Object],
+        precode: 'i = 1;',
+        code: '//#pragma sequential\nvar k=0for(var j=0;j<1e6;j++){k=k+i+1}',
+        in_progress: false,
+        wait_id: 1 },
+     next: [Circular],
+     prev: QNode { data: [Object], next: [Circular], prev: null, id: 1 },
+     id: 2 },
+  id: 3 }
+QNode {
+  data: 
+   { id: 4,
+     vars: { i: [Object], k: [Object], j: [Object] },
+     taskNum: 2,
+     src: '// Test sample\n//#pragma parallel\nfor (var i=0; i<8; i++) {\n    //#pragma sequential\n    var k=0;\n    for (var j=0; j<1000000; j++) {\n        k = k + i + 1;\n        }\n    }\n//#pragma wait\nvar d = Date().toISOString();',
+     ast: [ [Object], [Object] ],
+     precode: 'i = 3;',
+     code: '//#pragma sequential\nvar k=0for(var j=0;j<1e6;j++){k=k+i+1}',
+     in_progress: false,
+     wait_id: 1 },
+  next: 
+   QNode {
+     data: 
+      { id: 5,
+        vars: [Object],
+        taskNum: 2,
+        src: '// Test sample\n//#pragma parallel\nfor (var i=0; i<8; i++) {\n    //#pragma sequential\n    var k=0;\n    for (var j=0; j<1000000; j++) {\n        k = k + i + 1;\n        }\n    }\n//#pragma wait\nvar d = Date().toISOString();',
+        ast: [Object],
+        precode: 'i = 4;',
+        code: '//#pragma sequential\nvar k=0for(var j=0;j<1e6;j++){k=k+i+1}',
+        in_progress: false,
+        wait_id: 1 },
+     next: QNode { data: [Object], next: [Object], prev: [Circular], id: 6 },
+     prev: [Circular],
+     id: 5 },
+  prev: 
+   QNode {
+     data: 
+      { id: 3,
+        vars: [Object],
+        taskNum: 2,
+        src: '// Test sample\n//#pragma parallel\nfor (var i=0; i<8; i++) {\n    //#pragma sequential\n    var k=0;\n    for (var j=0; j<1000000; j++) {\n        k = k + i + 1;\n        }\n    }\n//#pragma wait\nvar d = Date().toISOString();',
+        ast: [Object],
+        precode: 'i = 2;',
+        code: '//#pragma sequential\nvar k=0for(var j=0;j<1e6;j++){k=k+i+1}',
+        in_progress: false,
+        wait_id: 1 },
+     next: [Circular],
+     prev: QNode { data: [Object], next: [Circular], prev: [Object], id: 2 },
+     id: 3 },
+  id: 4 }
+QNode {
+  data: 
+   { id: 5,
+     vars: { i: [Object], k: [Object], j: [Object] },
+     taskNum: 2,
+     src: '// Test sample\n//#pragma parallel\nfor (var i=0; i<8; i++) {\n    //#pragma sequential\n    var k=0;\n    for (var j=0; j<1000000; j++) {\n        k = k + i + 1;\n        }\n    }\n//#pragma wait\nvar d = Date().toISOString();',
+     ast: [ [Object], [Object] ],
+     precode: 'i = 4;',
+     code: '//#pragma sequential\nvar k=0for(var j=0;j<1e6;j++){k=k+i+1}',
+     in_progress: false,
+     wait_id: 1 },
+  next: 
+   QNode {
+     data: 
+      { id: 6,
+        vars: [Object],
+        taskNum: 2,
+        src: '// Test sample\n//#pragma parallel\nfor (var i=0; i<8; i++) {\n    //#pragma sequential\n    var k=0;\n    for (var j=0; j<1000000; j++) {\n        k = k + i + 1;\n        }\n    }\n//#pragma wait\nvar d = Date().toISOString();',
+        ast: [Object],
+        precode: 'i = 5;',
+        code: '//#pragma sequential\nvar k=0for(var j=0;j<1e6;j++){k=k+i+1}',
+        in_progress: false,
+        wait_id: 1 },
+     next: QNode { data: [Object], next: [Object], prev: [Circular], id: 7 },
+     prev: [Circular],
+     id: 6 },
+  prev: 
+   QNode {
+     data: 
+      { id: 4,
+        vars: [Object],
+        taskNum: 2,
+        src: '// Test sample\n//#pragma parallel\nfor (var i=0; i<8; i++) {\n    //#pragma sequential\n    var k=0;\n    for (var j=0; j<1000000; j++) {\n        k = k + i + 1;\n        }\n    }\n//#pragma wait\nvar d = Date().toISOString();',
+        ast: [Object],
+        precode: 'i = 3;',
+        code: '//#pragma sequential\nvar k=0for(var j=0;j<1e6;j++){k=k+i+1}',
+        in_progress: false,
+        wait_id: 1 },
+     next: [Circular],
+     prev: QNode { data: [Object], next: [Circular], prev: [Object], id: 3 },
+     id: 4 },
+  id: 5 }
+QNode {
+  data: 
+   { id: 6,
+     vars: { i: [Object], k: [Object], j: [Object] },
+     taskNum: 2,
+     src: '// Test sample\n//#pragma parallel\nfor (var i=0; i<8; i++) {\n    //#pragma sequential\n    var k=0;\n    for (var j=0; j<1000000; j++) {\n        k = k + i + 1;\n        }\n    }\n//#pragma wait\nvar d = Date().toISOString();',
+     ast: [ [Object], [Object] ],
+     precode: 'i = 5;',
+     code: '//#pragma sequential\nvar k=0for(var j=0;j<1e6;j++){k=k+i+1}',
+     in_progress: false,
+     wait_id: 1 },
+  next: 
+   QNode {
+     data: 
+      { id: 7,
+        vars: [Object],
+        taskNum: 2,
+        src: '// Test sample\n//#pragma parallel\nfor (var i=0; i<8; i++) {\n    //#pragma sequential\n    var k=0;\n    for (var j=0; j<1000000; j++) {\n        k = k + i + 1;\n        }\n    }\n//#pragma wait\nvar d = Date().toISOString();',
+        ast: [Object],
+        precode: 'i = 6;',
+        code: '//#pragma sequential\nvar k=0for(var j=0;j<1e6;j++){k=k+i+1}',
+        in_progress: false,
+        wait_id: 1 },
+     next: QNode { data: [Object], next: null, prev: [Circular], id: 8 },
+     prev: [Circular],
+     id: 7 },
+  prev: 
+   QNode {
+     data: 
+      { id: 5,
+        vars: [Object],
+        taskNum: 2,
+        src: '// Test sample\n//#pragma parallel\nfor (var i=0; i<8; i++) {\n    //#pragma sequential\n    var k=0;\n    for (var j=0; j<1000000; j++) {\n        k = k + i + 1;\n        }\n    }\n//#pragma wait\nvar d = Date().toISOString();',
+        ast: [Object],
+        precode: 'i = 4;',
+        code: '//#pragma sequential\nvar k=0for(var j=0;j<1e6;j++){k=k+i+1}',
+        in_progress: false,
+        wait_id: 1 },
+     next: [Circular],
+     prev: QNode { data: [Object], next: [Circular], prev: [Object], id: 4 },
+     id: 5 },
+  id: 6 }
+QNode {
+  data: 
+   { id: 7,
+     vars: { i: [Object], k: [Object], j: [Object] },
+     taskNum: 2,
+     src: '// Test sample\n//#pragma parallel\nfor (var i=0; i<8; i++) {\n    //#pragma sequential\n    var k=0;\n    for (var j=0; j<1000000; j++) {\n        k = k + i + 1;\n        }\n    }\n//#pragma wait\nvar d = Date().toISOString();',
+     ast: [ [Object], [Object] ],
+     precode: 'i = 6;',
+     code: '//#pragma sequential\nvar k=0for(var j=0;j<1e6;j++){k=k+i+1}',
+     in_progress: false,
+     wait_id: 1 },
+  next: 
+   QNode {
+     data: 
+      { id: 8,
+        vars: [Object],
+        taskNum: 2,
+        src: '// Test sample\n//#pragma parallel\nfor (var i=0; i<8; i++) {\n    //#pragma sequential\n    var k=0;\n    for (var j=0; j<1000000; j++) {\n        k = k + i + 1;\n        }\n    }\n//#pragma wait\nvar d = Date().toISOString();',
+        ast: [Object],
+        precode: 'i = 7;',
+        code: '//#pragma sequential\nvar k=0for(var j=0;j<1e6;j++){k=k+i+1}',
+        in_progress: false,
+        wait_id: 1 },
+     next: null,
+     prev: [Circular],
+     id: 8 },
+  prev: 
+   QNode {
+     data: 
+      { id: 6,
+        vars: [Object],
+        taskNum: 2,
+        src: '// Test sample\n//#pragma parallel\nfor (var i=0; i<8; i++) {\n    //#pragma sequential\n    var k=0;\n    for (var j=0; j<1000000; j++) {\n        k = k + i + 1;\n        }\n    }\n//#pragma wait\nvar d = Date().toISOString();',
+        ast: [Object],
+        precode: 'i = 5;',
+        code: '//#pragma sequential\nvar k=0for(var j=0;j<1e6;j++){k=k+i+1}',
+        in_progress: false,
+        wait_id: 1 },
+     next: [Circular],
+     prev: QNode { data: [Object], next: [Circular], prev: [Object], id: 5 },
+     id: 6 },
+  id: 7 }

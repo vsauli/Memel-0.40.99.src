@@ -1,0 +1,26 @@
+Example app listening at http://:::8888
+Toplevel == undefined == undefined == undefined == undefined == undefined == undefined
+SimpleStatement == undefined == undefined == undefined == undefined == undefined == undefined
+Assign == undefined == undefined == undefined == undefined == undefined == undefined
+SymbolRef == undefined == j == undefined == undefined == undefined == undefined
+Number == 1 == undefined == undefined == undefined == undefined == undefined
+For == undefined == undefined == [object Object] == [object Object] == [object Object] == undefined
+Var == undefined == undefined == undefined == undefined == undefined == undefined
+VarDef == [object Object] == [object Object] == undefined == undefined == undefined == undefined
+SymbolVar == undefined == i == undefined == undefined == undefined == undefined
+Number == 0 == undefined == undefined == undefined == undefined == undefined
+VarDef == [object Object] == [object Object] == undefined == undefined == undefined == undefined
+SymbolVar == undefined == j == undefined == undefined == undefined == undefined
+Number == 0 == undefined == undefined == undefined == undefined == undefined
+Binary == undefined == undefined == undefined == undefined == undefined == undefined
+SymbolRef == undefined == i == undefined == undefined == undefined == undefined
+Number == 20 == undefined == undefined == undefined == undefined == undefined
+UnaryPostfix == undefined == undefined == undefined == undefined == undefined == [object Object]
+SymbolRef == undefined == i == undefined == undefined == undefined == undefined
+BlockStatement == undefined == undefined == undefined == undefined == undefined == undefined
+SimpleStatement == undefined == undefined == undefined == undefined == undefined == undefined
+Assign == undefined == undefined == undefined == undefined == undefined == undefined
+SymbolRef == undefined == i == undefined == undefined == undefined == undefined
+Binary == undefined == undefined == undefined == undefined == undefined == undefined
+SymbolRef == undefined == i == undefined == undefined == undefined == undefined
+Number == 1 == undefined == undefined == undefined == undefined == undefined

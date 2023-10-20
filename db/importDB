@@ -1,0 +1,1 @@
+mongoimport --db control --collection news --drop --file news.json -vvvvv

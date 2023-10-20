@@ -1,0 +1,65 @@
+var OPUS=1;
+var a=global.__cached[12]["a"];
+var aidx=global.__cached[12]["aidx"];
+var arow=global.__cached[12]["arow"];
+;var i = 1;;
+a = a;aidx = aidx;arow = arow;console.log("Cashed OPU #" + i);;__job.data.vars['OPUS'].value=OPUS;
+return;
+function makea() {
+    var r = [];
+    // sparce array for non-zero random columns
+    var sa = [];
+    // native sparce version of matrix a
+    var size;
+    for (i = 0; i < n; i++) {
+        sa[i] = [];
+    }
+    for (i = 0; i < n; i++) {
+        r = [];
+        for (j = 1; j <= non_zeros; j++) {
+            r[Math.floor(Math.random() * n)] = Math.random();
+        }
+        while (r.reduce(function(t) {
+            ++t;
+        }) < non_zeros) {
+            // while there was dublicates
+            r[Math.floor(Math.random() * n)] = Math.random();
+        }
+        r[i] = .5;
+        size = Math.pow(rcond, i / n);
+        for (j in r) {
+            for (k in r) {
+                if (!sa[j][k]) sa[j][k] = 0;
+                sa[j][k] += r[j] * r[k] * size;
+            }
+        }
+    }
+    for (i = 0; i < n; i++) {
+        if (!sa[i][i]) sa[i][i] = 0;
+        sa[i][i] += rcond;
+    }
+    finish_time = new Date().getTime();
+    elapse_time = (finish_time - start_time) / 1e3;
+    console.log("Base matrix creation time: " + elapse_time + " sec");
+    start_time = finish_time;
+    //    console.log(sa);
+    // make compressed sparse matrix 'a' like in nesl example's SPARSE function
+    nzc = 0;
+    var k;
+    for (i = 0; i < n; i++) {
+        k = 0;
+        for (j in sa[i]) {
+            a.push(Math.round(sa[i][j] * 1e3) / 1e3);
+            aidx.push(j * 1);
+            k++;
+        }
+        sa[i].length = 0;
+        arow.push(k);
+        nzc += k;
+    }
+    console.log("Final nonzero count: " + nzc);
+}function dotp(v1, v2) {
+    var res = 0;
+    for (var ii = 0; ii < n; ii++) res += v1[ii] * v2[ii];
+    return res;
+}
